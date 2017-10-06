@@ -38,6 +38,7 @@ class GameScene: SKScene {
     
     var gameOver = false
     
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -45,8 +46,11 @@ class GameScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         
-        backgroundColor = SKColor.brown
-    }
+        backgroundColor = SKColor.blue
+        
+        scaleFactor = self.size.width / 320
+        
+     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     

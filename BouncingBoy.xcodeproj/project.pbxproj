@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7AA41DB01F883A2A00276971 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA41DAF1F883A2A00276971 /* GameElements.swift */; };
 		7AB2A0E31F61DAF10050EC06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2A0E21F61DAF10050EC06 /* AppDelegate.swift */; };
 		7AB2A0E51F61DAF10050EC06 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AB2A0E41F61DAF10050EC06 /* GameScene.sks */; };
 		7AB2A0E71F61DAF10050EC06 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AB2A0E61F61DAF10050EC06 /* Actions.sks */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7AA41DAF1F883A2A00276971 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		7AB2A0DF1F61DAF10050EC06 /* BouncingBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB2A0E21F61DAF10050EC06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AB2A0E41F61DAF10050EC06 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				7AB2A0E61F61DAF10050EC06 /* Actions.sks */,
 				7AB2A0E81F61DAF10050EC06 /* GameScene.swift */,
 				7AB2A0EA1F61DAF10050EC06 /* GameViewController.swift */,
+				7AA41DAF1F883A2A00276971 /* GameElements.swift */,
 				7AB2A0EC1F61DAF10050EC06 /* Main.storyboard */,
 				7AB2A0EF1F61DAF10050EC06 /* Assets.xcassets */,
 				7AB2A0F11F61DAF10050EC06 /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA41DB01F883A2A00276971 /* GameElements.swift in Sources */,
 				7AB2A0E91F61DAF10050EC06 /* GameScene.swift in Sources */,
 				7AB2A0EB1F61DAF10050EC06 /* GameViewController.swift in Sources */,
 				7AB2A0E31F61DAF10050EC06 /* AppDelegate.swift in Sources */,
@@ -519,6 +523,7 @@
 				7AB2A10F1F61DAF20050EC06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AB2A1101F61DAF20050EC06 /* Build configuration list for PBXNativeTarget "BouncingBoyTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +532,7 @@
 				7AB2A1121F61DAF20050EC06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AB2A1131F61DAF20050EC06 /* Build configuration list for PBXNativeTarget "BouncingBoyUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +541,7 @@
 				7AB2A1151F61DAF20050EC06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
