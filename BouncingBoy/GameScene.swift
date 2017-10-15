@@ -38,6 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var gameOver = false
     
+    var currentMaxY: Int!
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -47,19 +49,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         super.init(size: size)
         
         backgroundColor = SKColor.blue
+        let levelData = GameHandler.shared.levelData
+        
+        currentMaxY = 80
+        GameHandler.shared.score = 0
+        gameOver = false
+        
+        endOfGamePosition = (levelData!["EndOfLevel"] as AnyObject).integerValue
         
         scaleFactor = self.size.width / 320
         
         //        background = createBackground()
         //        addChild(background!)
         
-        let levelData = GameHandler.shared.levelData
         
         midground = createMidground()
         addChild(midground!)
         
         foreground = SKNode()
         addChild(foreground!)
+        
+        hud = SKNode()
+        addChild(hud!)
+        
+        startButton.position = CGPoint(x: self.size.width / 2.0, y: 180)
+        hud?.addChild(startButton)
+        
+        scoreLabel = SKLabelNode(fontNamed: "AmericanTypewriter-Bold")
+        scoreLabel?.fontSize = 30
+        scoreLabel?.fontColor = SKColor.white
+        scoreLabel?.position = CGPoint(x: self.size.width - 20, y: self.size.height - 40)
+        scoreLabel?.horizontalAlignmentMode = .right
+        
+        scoreLabel?.text = "0"
+        hud?.addChild(scoreLabel!)
         
         player = createPlayer()
         foreground?.addChild(player!)
@@ -103,6 +126,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
+        var updateHUD = false
+        
         var otherNode:SKNode!
         
         if contact.bodyA.node != player {
@@ -111,7 +137,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             otherNode = contact.bodyB.node
         }
         
-        (otherNode as! GenericNode).collistion(withPlayer: player!)
+        updateHUD = (otherNode as! GenericNode).collistion(withPlayer: player!)
+        
+        if updateHUD {
+            scoreLabel?.text = "\(GameHandler.shared.score)"
+        }
     }
     
     override func didSimulatePhysics() {
@@ -125,6 +155,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if player!.physicsBody!.isDynamic {
+            return
+        }
+        
+        startButton.removeFromParent()
+        
         player?.physicsBody?.isDynamic = true
         player?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
     }
@@ -143,5 +179,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             foreground?.position = CGPoint(x: 0, y: -((player!.position.y - 200)))
             
         }
+        
+        if Int(player!.position.y) > currentMaxY {
+            GameHandler.shared.score += Int(player!.position.y) - currentMaxY
+            currentMaxY = Int(player!.position.y)
+            scoreLabel?.text = "\(GameHandler.shared.score)"
+        }
+        
+        if Int(player!.position.y) > endOfGamePosition {
+            endGame()
+        }
+        
+        if Int(player!.position.y) < currentMaxY - 800 {
+            endGame()
+        }
+    }
+    
+    func endGame() {
+        gameOver = true
+        GameHandler.shared.saveGameStats()
+        
+        let transition = SKTransition.fade(withDuration: 0.5)
     }
 }
