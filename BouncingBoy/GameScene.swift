@@ -50,8 +50,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         scaleFactor = self.size.width / 320
         
-//        background = createBackground()
-//        addChild(background!)
+        //        background = createBackground()
+        //        addChild(background!)
+        
+        let levelData = GameHandler.shared.levelData
         
         midground = createMidground()
         addChild(midground!)
@@ -62,8 +64,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = createPlayer()
         foreground?.addChild(player!)
         
-        let platform = createPlatform(atPostion: CGPoint(x: 160, y: 320), ofType: .normalBrick)
-        foreground?.addChild(platform)
+        //        let platform = createPlatform(atPostion: CGPoint(x: 160, y: 320), ofType: .normalBrick)
+        //        foreground?.addChild(platform)
+        let platforms = levelData!["Platforms"] as! NSDictionary
+        let platformPatterns = platforms["Patterns"] as! NSDictionary
+        let platformPositions = platforms["Positions"] as! [NSDictionary]
+        
+        for platformPosition in platformPositions {
+            let x = (platformPosition["x"] as AnyObject).floatValue
+            let y = (platformPosition["y"] as AnyObject).floatValue
+            
+            let pattern  = platformPosition["pattern"] as! NSString
+            
+            let platformPattern = platformPatterns[pattern] as! [NSDictionary]
+            
+            for platformPoint in platformPattern {
+                let xValue = (platformPoint["x"] as AnyObject).floatValue
+                let yValue = (platformPoint["y"] as AnyObject).floatValue
+                let type = PlatformType(rawValue: (platformPoint["type"] as AnyObject).integerValue)
+                let xPosition = CGFloat(xValue! + x!)
+                let yPosition = CGFloat(yValue! + y!)
+                
+                let platformNode = createPlatform(atPostion: CGPoint(x: xPosition, y: yPosition), ofType: type!)
+                foreground?.addChild(platformNode)
+            }
+        }
         
         physicsWorld.gravity = CGVector(dx: 0, dy: -2)
         physicsWorld.contactDelegate = self
@@ -75,7 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.xAcceleration = (CGFloat(acceleration.x) * 0.75) + (self.xAcceleration * 0.25)
             }
         }
-     }
+    }
     
     func didBegin(_ contact: SKPhysicsContact) {
         var otherNode:SKNode!
@@ -106,6 +131,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        
+        foreground?.enumerateChildNodes(withName: "platformNode", using: { (node, stop) in
+            let platform = node as! PlatformNode
+            platform.shouldRemoveNode(playerY: self.player!.position.y)
+        })
+        
+        if player!.position.y > 200 {
+            background?.position = CGPoint(x: 0, y: -((player!.position.y - 200) / 10))
+            midground?.position = CGPoint(x: 0, y: -((player!.position.y - 200) / 4))
+            foreground?.position = CGPoint(x: 0, y: -((player!.position.y - 200)))
+            
+        }
     }
 }

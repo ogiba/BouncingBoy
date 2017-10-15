@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7A8888081F93BB75005D0D32 /* GenericNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8888071F93BB75005D0D32 /* GenericNode.swift */; };
 		7A88880A1F93BFD8005D0D32 /* PlatformNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8888091F93BFD8005D0D32 /* PlatformNode.swift */; };
+		7A88880C1F93C74C005D0D32 /* Level01.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A88880B1F93C74C005D0D32 /* Level01.plist */; };
+		7A88880E1F93C7E1005D0D32 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A88880D1F93C7E1005D0D32 /* GameHandler.swift */; };
 		7AA41DB01F883A2A00276971 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA41DAF1F883A2A00276971 /* GameElements.swift */; };
 		7AB2A0E31F61DAF10050EC06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB2A0E21F61DAF10050EC06 /* AppDelegate.swift */; };
 		7AB2A0E51F61DAF10050EC06 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7AB2A0E41F61DAF10050EC06 /* GameScene.sks */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		7A8888071F93BB75005D0D32 /* GenericNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNode.swift; sourceTree = "<group>"; };
 		7A8888091F93BFD8005D0D32 /* PlatformNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformNode.swift; sourceTree = "<group>"; };
+		7A88880B1F93C74C005D0D32 /* Level01.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Level01.plist; sourceTree = "<group>"; };
+		7A88880D1F93C7E1005D0D32 /* GameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
 		7AA41DAF1F883A2A00276971 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		7AB2A0DF1F61DAF10050EC06 /* BouncingBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB2A0E21F61DAF10050EC06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				7AB2A0E21F61DAF10050EC06 /* AppDelegate.swift */,
+				7A88880D1F93C7E1005D0D32 /* GameHandler.swift */,
 				7AB2A0E41F61DAF10050EC06 /* GameScene.sks */,
 				7AB2A0E61F61DAF10050EC06 /* Actions.sks */,
 				7AB2A0E81F61DAF10050EC06 /* GameScene.swift */,
@@ -121,6 +126,7 @@
 				7AB2A0EF1F61DAF10050EC06 /* Assets.xcassets */,
 				7AB2A0F11F61DAF10050EC06 /* LaunchScreen.storyboard */,
 				7AB2A0F41F61DAF10050EC06 /* Info.plist */,
+				7A88880B1F93C74C005D0D32 /* Level01.plist */,
 			);
 			path = BouncingBoy;
 			sourceTree = "<group>";
@@ -252,6 +258,7 @@
 			files = (
 				7AB2A0EE1F61DAF10050EC06 /* Main.storyboard in Resources */,
 				7AB2A0E51F61DAF10050EC06 /* GameScene.sks in Resources */,
+				7A88880C1F93C74C005D0D32 /* Level01.plist in Resources */,
 				7AB2A0F01F61DAF10050EC06 /* Assets.xcassets in Resources */,
 				7AB2A0F31F61DAF10050EC06 /* LaunchScreen.storyboard in Resources */,
 				7AB2A0E71F61DAF10050EC06 /* Actions.sks in Resources */,
@@ -282,6 +289,7 @@
 				7AA41DB01F883A2A00276971 /* GameElements.swift in Sources */,
 				7AB2A0E91F61DAF10050EC06 /* GameScene.swift in Sources */,
 				7AB2A0EB1F61DAF10050EC06 /* GameViewController.swift in Sources */,
+				7A88880E1F93C7E1005D0D32 /* GameHandler.swift in Sources */,
 				7A8888081F93BB75005D0D32 /* GenericNode.swift in Sources */,
 				7A88880A1F93BFD8005D0D32 /* PlatformNode.swift in Sources */,
 				7AB2A0E31F61DAF10050EC06 /* AppDelegate.swift in Sources */,
