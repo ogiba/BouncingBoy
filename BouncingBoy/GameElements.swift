@@ -55,5 +55,58 @@ extension GameScene {
         
         return midgroundNode
     }
+    
+    func createPlayer() -> SKNode {
+        let playerNode = SKNode()
+        playerNode.position = CGPoint(x: self.size.width / 2.0, y: 80)
+        
+        let sprite = SKSpriteNode(imageNamed: "player")
+        playerNode.addChild(sprite)
+        
+        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width / 2.0)
+        
+        playerNode.physicsBody?.isDynamic = false
+        playerNode.physicsBody?.allowsRotation = false
+
+        playerNode.physicsBody?.restitution = 1
+        playerNode.physicsBody?.friction = 0
+        playerNode.physicsBody?.angularDamping = 0
+        playerNode.physicsBody?.linearDamping = 0
+        
+        playerNode.physicsBody?.usesPreciseCollisionDetection = true
+        
+        playerNode.physicsBody?.categoryBitMask = CollistionBitMask.Player
+        
+        playerNode.physicsBody?.collisionBitMask = 0
+        playerNode.physicsBody?.contactTestBitMask = CollistionBitMask.Brick
+        
+        return playerNode
+    }
+    
+    func createPlatform(atPostion position: CGPoint, ofType type: PlatformType) -> PlatformNode {
+        let node = PlatformNode()
+        let position = CGPoint(x: position.x * scaleFactor!, y: position.y)
+        node.position = position
+        node.name = "platformNode"
+        node.platformType = type
+        
+        var sprite: SKSpriteNode
+        
+        switch type {
+        case .normalBrick:
+            sprite = SKSpriteNode(imageNamed: "platform")
+        case .breakableBrick:
+            sprite = SKSpriteNode(imageNamed: "platformBreakable")
+        }
+        
+        node.addChild(sprite)
+        
+        node.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+        node.physicsBody?.isDynamic = false
+        node.physicsBody?.categoryBitMask = CollistionBitMask.Brick
+        node.physicsBody?.collisionBitMask = 0
+        
+        return node
+    }
 }
 

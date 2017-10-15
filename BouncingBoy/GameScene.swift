@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: SKNode?
     var midground: SKNode?
@@ -50,10 +50,58 @@ class GameScene: SKScene {
         
         scaleFactor = self.size.width / 320
         
+//        background = createBackground()
+//        addChild(background!)
+        
+        midground = createMidground()
+        addChild(midground!)
+        
+        foreground = SKNode()
+        addChild(foreground!)
+        
+        player = createPlayer()
+        foreground?.addChild(player!)
+        
+        let platform = createPlatform(atPostion: CGPoint(x: 160, y: 320), ofType: .normalBrick)
+        foreground?.addChild(platform)
+        
+        physicsWorld.gravity = CGVector(dx: 0, dy: -2)
+        physicsWorld.contactDelegate = self
+        
+        motionManager.accelerometerUpdateInterval = 0.2
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
+            if let accelerometerData = data {
+                let acceleration = accelerometerData.acceleration
+                self.xAcceleration = (CGFloat(acceleration.x) * 0.75) + (self.xAcceleration * 0.25)
+            }
+        }
      }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func didBegin(_ contact: SKPhysicsContact) {
+        var otherNode:SKNode!
+        
+        if contact.bodyA.node != player {
+            otherNode = contact.bodyA.node
+        } else {
+            otherNode = contact.bodyB.node
+        }
+        
+        (otherNode as! GenericNode).collistion(withPlayer: player!)
+    }
     
+    override func didSimulatePhysics() {
+        player?.physicsBody?.velocity = CGVector(dx: xAcceleration * 400, dy: player!.physicsBody!.velocity.dy)
+        
+        if player!.position.x < -20 {
+            player?.position = CGPoint(x: self.size.width + 20, y: player!.position.y)
+        }else if (player!.position.x > self.size.width + 20){
+            player?.position = CGPoint(x: -20, y: player!.position.y)
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        player?.physicsBody?.isDynamic = true
+        player?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
     }
     
     
