@@ -156,6 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if player!.physicsBody!.isDynamic {
+            player?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
             return
         }
         
@@ -167,6 +168,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
+
+        if gameOver {
+            return
+        }
         
         foreground?.enumerateChildNodes(withName: "platformNode", using: { (node, stop) in
             let platform = node as! PlatformNode
@@ -200,5 +205,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         GameHandler.shared.saveGameStats()
         
         let transition = SKTransition.fade(withDuration: 0.5)
+        let endGameScene = EndGame(size: self.size)
+        self.view?.presentScene(endGameScene, transition: transition)
     }
 }
